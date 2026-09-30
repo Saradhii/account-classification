@@ -1,5 +1,5 @@
 {
-  "notes": "Eval-only. The pipeline must never read this file. Derived from docs/scenarios.md.",
+  "notes": "Intended labels for the synthetic dataset, with rationale. Eval-only; the pipeline must never read this file.",
   "gold": [
     {
       "accountId": "ACC-MERIDIAN",

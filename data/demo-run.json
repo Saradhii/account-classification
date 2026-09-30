@@ -1,0 +1,588 @@
+{
+  "runId": "run-2026-09-30T12-18-12-140Z",
+  "startedAt": "2026-09-30T12:18:12.140Z",
+  "finishedAt": "2026-09-30T12:22:26.498Z",
+  "modelUsed": "glm-5.3",
+  "results": [
+    {
+      "accountId": "ACC-MERIDIAN",
+      "runId": "run-2026-09-30T12-18-12-140Z",
+      "priorLabel": null,
+      "generatedAt": "2026-09-30T12:18:12.148Z",
+      "modelUsed": "glm-5.3",
+      "outcome": "labeled",
+      "label": "Positive",
+      "confidence": 0.96,
+      "reasoning": "This window shows a strengthening relationship with no countervailing friction. An executive praised the payments launch and thanked the delivery team, the bank's CFO independently budgeted for the next module, and the CIO volunteered to attend the next session, indicating expanding executive engagement and renewal/expansion intent. Supporting project-level data and staff feedback exceeded expectations, and both scheduled meetings completed with senior bank participation. One minor open cosmetic defect was routine and had no relational impact.",
+      "evidence": [
+        {
+          "taskId": "TSK-008",
+          "sentiment": "Positive",
+          "note": "Days before the window closes, the VP reports the prior day's session went well and that the bank's CIO personally requested to sit in on the next session, showing seniority of engagement rising rather than decaying.",
+          "citedPersona": "Dana Whitfield",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-005",
+          "sentiment": "Positive",
+          "note": "A decision-maker confirms the bank's CFO had already earmarked digital onboarding in next year's draft budget unprompted, which is concrete expansion intent, and she accepts the scoping meeting including her project lead.",
+          "citedPersona": "Dana Whitfield",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-001",
+          "sentiment": "Positive",
+          "note": "The VP sends unsolicited praise after a smooth launch weekend, publicly thanking the delivery crew, which signals satisfaction and trust at the executive level.",
+          "citedPersona": "Dana Whitfield",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-007",
+          "sentiment": "Positive",
+          "note": "The project lead voluntarily puts in writing that branch staff rated the new flows the best digital score in his tenure, praise offered beyond any obligation.",
+          "citedPersona": "Tom Reyes",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-003",
+          "sentiment": "Positive",
+          "note": "Launch metrics shared by the project lead show error rates better than testing predicted and only trivial tickets, corroborating that the delivery success is real rather than politeness.",
+          "citedPersona": "Tom Reyes",
+          "weight": "Low"
+        }
+      ],
+      "eventEvidence": [
+        {
+          "eventId": "EVT-001",
+          "note": "The bank itself requested and completed the quarterly review with both the VP and the project lead present, showing inbound initiative at the decision-maker level.",
+          "weight": "Medium"
+        },
+        {
+          "eventId": "EVT-002",
+          "note": "The expansion scoping session ran as planned with full senior attendance from the bank, demonstrating follow-through on the new opportunity rather than stalled interest.",
+          "weight": "Medium"
+        }
+      ],
+      "consideredMessages": 8,
+      "filteredAsAutomated": 0,
+      "routedToReview": false,
+      "salesforceWrite": "written",
+      "ruleAdjustments": [],
+      "llmMode": "fallback",
+      "tokens": {
+        "input": 1779,
+        "output": 1865
+      }
+    },
+    {
+      "accountId": "ACC-NOORDBANK",
+      "runId": "run-2026-09-30T12-18-12-140Z",
+      "priorLabel": null,
+      "generatedAt": "2026-09-30T12:18:12.188Z",
+      "modelUsed": "glm-5.3",
+      "outcome": "labeled",
+      "label": "Positive",
+      "confidence": 0.9,
+      "reasoning": "The window shows a prospect relationship strengthening decisively across personas and channels: the bank's architect praised the vendor's candid technical answers as the best in their evaluation, the working group ranked the platform first on the shortlist, and a board-level sponsor requested a demo before final board review. Procurement independently initiated its security assessment in parallel with the technical track, and a bank-requested deep-dive completed with the IT Director attending. No persona or channel produced friction, complaints, or disengagement during the window, so the net direction is clearly Positive rather than Mixed.",
+      "evidence": [
+        {
+          "taskId": "TSK-013",
+          "sentiment": "Positive",
+          "note": "The IT Director reports the working group placed the platform first on the shortlist and that the board sponsor of the modernisation programme wants a personal demo before the shortlist reaches the full board — strong forward progress and decision-maker engagement.",
+          "citedPersona": "Eline de Groot",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-011",
+          "sentiment": "Positive",
+          "note": "The bank's Enterprise Architect explicitly praises the vendor's honest engineering answers as the most straightforward they have received in the process, unfavorably comparing the incumbent's brochure-style response, and continues with deeper follow-up questions — clear trust-building and continued engagement.",
+          "citedPersona": "Ruben van Dijk",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-009",
+          "sentiment": "Positive",
+          "note": "The Enterprise Architect proactively initiates detailed architecture questions in preparation for taking the platform to the bank's steering group — inbound initiative beyond routine obligations.",
+          "citedPersona": "Ruben van Dijk",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-015",
+          "sentiment": "Positive",
+          "note": "The Security and Procurement Officer initiates the formal vendor assessment and states it is proceeding in parallel with the technical track, showing the evaluation is advancing on an additional front.",
+          "citedPersona": "Sanne Bakker",
+          "weight": "Low"
+        }
+      ],
+      "eventEvidence": [
+        {
+          "eventId": "EVT-003",
+          "note": "A 90-minute technical deep-dive requested by the bank was completed, attended by both the Enterprise Architect and the IT Director, corroborating active senior-level engagement in the technical track.",
+          "weight": "Medium"
+        }
+      ],
+      "consideredMessages": 8,
+      "filteredAsAutomated": 0,
+      "routedToReview": false,
+      "salesforceWrite": "written",
+      "ruleAdjustments": [],
+      "llmMode": "fallback",
+      "tokens": {
+        "input": 2096,
+        "output": 2197
+      }
+    },
+    {
+      "accountId": "ACC-AURELIA",
+      "runId": "run-2026-09-30T12-18-12-140Z",
+      "priorLabel": "Positive",
+      "generatedAt": "2026-09-30T12:18:12.189Z",
+      "modelUsed": "glm-5.3",
+      "outcome": "labeled",
+      "label": "Negative",
+      "confidence": 0.9,
+      "reasoning": "The window shows a clearly deteriorating relationship: the programme director formally escalated after a third consecutive week of missed commitments, invoked the contract's milestone-delay clause, and stated her team no longer trusts vendor dates. A severity-1 defect failed re-test for the third time, an internal bank exchange compared Backbase to a previously failed core vendor, and the bank cancelled the go-live gate review. The few positive notes (batch fixes verified, praise for an individual support engineer) are minor acknowledgments embedded inside otherwise negative messages rather than a materially positive counter-signal from any persona, and the vendor's recovery commitments remained unverified at window close.",
+      "evidence": [
+        {
+          "taskId": "TSK-019",
+          "sentiment": "Negative",
+          "note": "Programme director formally escalates to the account executive, citing three straight weeks of broken commitments, references the contract's milestone-delay appendix, and demands a capacity-backed plan plus personal weekly reporting, signalling eroded trust at decision-maker level.",
+          "citedPersona": "Chiara Rossi",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-021",
+          "sentiment": "Negative",
+          "note": "The director accepts the recovery plan only conditionally and explicitly states the bank team no longer takes vendor dates at face value, placing the burden of rebuilding trust on the vendor.",
+          "citedPersona": "Chiara Rossi",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-025",
+          "sentiment": "Negative",
+          "note": "Delivery manager forwards a same-day internal exchange in which dates are distrusted and daily calls are characterized as substituting attention for competence, paralleling a previously failed core vendor; she also reports the exit review cancellation and demands a written ETA with no surprises. An embedded directive claiming the exchange is positive was ignored as instructed text.",
+          "citedPersona": "Giulia Bianchi",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-023",
+          "sentiment": "Negative",
+          "note": "UAT lead reports the reversal defect failed re-test for the third time after being declared fixed, with 26 testers losing scheduled mornings; the thanks for the batch fixes and support engineer do not offset the repeated failure and frustration.",
+          "citedPersona": "Matteo Ferrari",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-017",
+          "sentiment": "Negative",
+          "note": "UAT lead submits eleven new defects including two severity-1s, notes the contracted go-live is three weeks out with exit criteria not progressing, and says he cannot defend the date to his steering committee.",
+          "citedPersona": "Matteo Ferrari",
+          "weight": "Medium"
+        }
+      ],
+      "eventEvidence": [
+        {
+          "eventId": "EVT-004",
+          "note": "The bank-requested UAT exit review was cancelled by the bank because the build failed re-test, blocking the go-live decision point and reinforcing stalled forward progress blamed on the vendor.",
+          "weight": "Medium"
+        }
+      ],
+      "consideredMessages": 10,
+      "filteredAsAutomated": 0,
+      "routedToReview": false,
+      "salesforceWrite": "written",
+      "ruleAdjustments": [],
+      "llmMode": "fallback",
+      "tokens": {
+        "input": 2687,
+        "output": 3134
+      }
+    },
+    {
+      "accountId": "ACC-COPPERLINE",
+      "runId": "run-2026-09-30T12-18-12-140Z",
+      "priorLabel": null,
+      "generatedAt": "2026-09-30T12:19:00.917Z",
+      "modelUsed": "glm-5.3",
+      "outcome": "labeled",
+      "label": "Negative",
+      "confidence": 0.85,
+      "reasoning": "The decisive signal is the bank-side VP's direct update: capital budget frozen by the board, all new spend parked for the fiscal year, and an August pilot with a competing provider covering the mobile scope for the foreseeable future, with no Q1 conversation to be expected. That is competitive displacement plus blocked progress, which the definitions treat as deterioration, and it comes from a decision-maker with high persona weight. Prior unanswered follow-ups before that reply show mild engagement decay, and nothing from any bank persona offers offsetting positive directional signal. The consistently cordial tone and the vendor's graceful step-back temper severity but not the direction.",
+      "evidence": [
+        {
+          "taskId": "TSK-029",
+          "sentiment": "Negative",
+          "note": "The VP Member Experience states that the board froze the capital budget, new line items are shelved for the fiscal year, a competitor's mobile pilot launched in August and is performing well with mobile staying with that vendor for the foreseeable future, and the vendor should not count on a conversation early next year. Respectful framing, but substantively competitive displacement and an indefinite deal block.",
+          "citedPersona": "Alicia Gomez",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-028",
+          "sentiment": "Negative",
+          "note": "The vendor's second consecutive follow-up, offering to stop contacting if timing is off, evidences roughly a week of silence from the bank after agreed workshop next steps, indicating fading engagement ahead of the formal decline.",
+          "citedPersona": "Alicia Gomez",
+          "weight": "Low"
+        },
+        {
+          "taskId": "TSK-031",
+          "sentiment": "Neutral",
+          "note": "Vendor closes out the sequence by sending a ready-made ROI page and stepping away until the budget conversation resumes, confirming the engagement is being paused rather than progressing within this window.",
+          "citedPersona": "Alicia Gomez",
+          "weight": "Low"
+        }
+      ],
+      "eventEvidence": [],
+      "consideredMessages": 5,
+      "filteredAsAutomated": 0,
+      "routedToReview": false,
+      "salesforceWrite": "written",
+      "ruleAdjustments": [],
+      "llmMode": "fallback",
+      "tokens": {
+        "input": 1403,
+        "output": 2174
+      }
+    },
+    {
+      "accountId": "ACC-FIRSTHARBOR",
+      "runId": "run-2026-09-30T12-18-12-140Z",
+      "priorLabel": null,
+      "generatedAt": "2026-09-30T12:19:07.420Z",
+      "modelUsed": "glm-5.3",
+      "outcome": "labeled",
+      "label": "Mixed",
+      "confidence": 0.85,
+      "reasoning": "The executive channel strengthened clearly over the window: the COO praised the wealth module results to his board and initiated a commercial onboarding expansion push, then pressed for defensible scope, cost, and pilot timing on an accelerated basis, supported by a bank-requested executive check-in. In the same window, the delivery program manager raised substantive, repeated friction: a third consecutive week of sandbox capacity problems blocking parallel test teams with a stalled ticket, and a second silently moved hotfix window in six weeks that left on-call staff idle, framed in terms of a broken process she refuses to tolerate. Per persona, one stakeholder's signals strengthened while another's showed genuine relational friction, so the finding is coexistence rather than a net direction, even though the executive side carries more weight.",
+      "evidence": [
+        {
+          "taskId": "TSK-032",
+          "sentiment": "Positive",
+          "note": "COO tells the vendor the wealth module produced the standout results in his board presentation, with advisor-assisted onboarding time down about 40%, and proactively requests a commercial onboarding expansion proposal, having already promised his board one was coming.",
+          "citedPersona": "Robert Hale",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-034",
+          "sentiment": "Positive",
+          "note": "COO pushes to accelerate the expansion, asking for phased scope, cost ranges, and pilot timing he can defend to a board that is already asking, and signals the initiative can move quickly if the proposal holds up.",
+          "citedPersona": "Robert Hale",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-037",
+          "sentiment": "Negative",
+          "note": "Delivery PM escalates a second unannounced hotfix window change within six weeks that left on-call staff sitting idle, explicitly distinguishing this from capacity issues and refusing to accept schedule changes without notification, language indicating eroded trust in the vendor's process.",
+          "citedPersona": "Emily Tran",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-035",
+          "sentiment": "Negative",
+          "note": "Delivery PM reports the shared sandbox has blocked parallel test teams for a third consecutive week, with the related ticket stalled twelve days at a monitoring status, forcing her teams to schedule around each other despite paying for parallel capacity.",
+          "citedPersona": "Emily Tran",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-038",
+          "sentiment": "Neutral",
+          "note": "Vendor CSM concedes the notification gap as their own process failure, makes the bank team named contacts with automatic change notices and monthly verification, and institutes a weekly sync, providing concrete remediation that keeps the delivery friction contained rather than escalating.",
+          "citedPersona": "Emily Tran",
+          "weight": "Low"
+        },
+        {
+          "taskId": "TSK-039",
+          "sentiment": "Neutral",
+          "note": "Delivery PM accepts the proposed weekly sync slot and volunteers her team leads to join, showing continued engagement and a cooperative working posture after the remediation, though the message is largely scheduling.",
+          "citedPersona": "Emily Tran",
+          "weight": "Low"
+        }
+      ],
+      "eventEvidence": [
+        {
+          "eventId": "EVT-005",
+          "note": "Bank-requested 30-minute executive check-in held and completed with the COO attending, showing inbound executive initiative during the expansion push and reinforcing the strengthening relationship at the decision-maker level.",
+          "weight": "Medium"
+        }
+      ],
+      "consideredMessages": 9,
+      "filteredAsAutomated": 0,
+      "routedToReview": false,
+      "salesforceWrite": "written",
+      "ruleAdjustments": [],
+      "llmMode": "fallback",
+      "tokens": {
+        "input": 2123,
+        "output": 6405
+      }
+    },
+    {
+      "accountId": "ACC-SOLVENTIA",
+      "runId": "run-2026-09-30T12-18-12-140Z",
+      "priorLabel": null,
+      "generatedAt": "2026-09-30T12:19:48.858Z",
+      "modelUsed": "glm-5.3",
+      "outcome": "labeled",
+      "label": "Neutral",
+      "confidence": 0.9,
+      "reasoning": "The window is almost entirely routine operations: a licence-count billing discrepancy was raised and corrected with a credit note within days, technical questions for the 8.4 upgrade were answered and confirmed working, and an upgrade window was agreed. The billing error was acknowledged and fixed by the vendor inside the window with no expressed frustration or lingering friction, so it stays operational rather than negative. The bank's IT lead is terse but cooperative through the final message, and no praise, escalation, disengagement, or other relationship-level signal appears. The personnel change was passed along purely as a record-keeping update.",
+      "evidence": [
+        {
+          "taskId": "TSK-042",
+          "sentiment": "Neutral",
+          "note": "Vendor admits the billing system carried the old licence count, issues a credit note the same day, and corrects future invoices; the only issue in the window was fully resolved without lingering friction.",
+          "citedPersona": "Lars Meijer",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-041",
+          "sentiment": "Neutral",
+          "note": "Bank flags that the invoice billed more sandbox licences than agreed and requests a correction; raised transactionally as a billing query, not a complaint.",
+          "citedPersona": "Lars Meijer",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-051",
+          "sentiment": "Neutral",
+          "note": "Bank lead picks an upgrade window, firmly notes the change freeze is enforced by their change board, and relays a colleague's departure as a records update; cooperative but carries no relational signal.",
+          "citedPersona": "Lars Meijer",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-043",
+          "sentiment": "Neutral",
+          "note": "Routine technical questions about certificate rollover and the upgrade runbook, part of normal release preparation.",
+          "citedPersona": "Lars Meijer",
+          "weight": "Low"
+        },
+        {
+          "taskId": "TSK-045",
+          "sentiment": "Neutral",
+          "note": "Brief confirmation that the answer worked, closing the technical thread cleanly and without friction.",
+          "citedPersona": "Lars Meijer",
+          "weight": "Low"
+        }
+      ],
+      "eventEvidence": [
+        {
+          "eventId": "EVT-006",
+          "note": "Vendor-initiated upgrade planning call held as scheduled with the bank's IT lead attending and producing concrete window options; routine operational progress with no directional signal.",
+          "weight": "Low"
+        }
+      ],
+      "consideredMessages": 8,
+      "filteredAsAutomated": 4,
+      "routedToReview": false,
+      "salesforceWrite": "written",
+      "ruleAdjustments": [],
+      "llmMode": "fallback",
+      "tokens": {
+        "input": 1665,
+        "output": 3547
+      }
+    },
+    {
+      "accountId": "ACC-TAHOE",
+      "runId": "run-2026-09-30T12-18-12-140Z",
+      "priorLabel": null,
+      "generatedAt": "2026-09-30T12:20:14.213Z",
+      "modelUsed": "glm-5.3",
+      "outcome": "labeled",
+      "label": "Positive",
+      "confidence": 0.94,
+      "reasoning": "The window shows a relationship moving from crisis to restoration: the VP of Technology explicitly reconciles over the previously broken reporting platform, praises the engineering fix, and states trust is restored, while the application manager reports measurable performance gains and proactively raises a forward-looking risk question. That question is answered within the window and converts into the bank requesting a training session that the VP will also attend. The only negative material is quoted history from August, which per the rules is not current-window sentiment. The completed retrospective with senior bank attendance reinforces the recovery arc.",
+      "evidence": [
+        {
+          "taskId": "TSK-053",
+          "sentiment": "Positive",
+          "note": "The VP of Technology explicitly declares the earlier conflict resolved, credits the fix and the support engineer for holding four clean weeks, and frames the turnaround as an internal reference story; strong trust-restoration signal from a decision-maker.",
+          "citedPersona": "Grace Liu",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-057",
+          "sentiment": "Positive",
+          "note": "The application manager proactively schedules the pipeline-health training session and notes the VP of Technology will join, showing inbound initiative from the bank late in the window.",
+          "citedPersona": "Owen Murphy",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-055",
+          "sentiment": "Positive",
+          "note": "The application manager shares hard performance metrics confirming the fix, notes analysts abandoned their workaround spreadsheets, and asks a forward-looking dependency question ahead of quarter close, indicating renewed confidence and engagement.",
+          "citedPersona": "Owen Murphy",
+          "weight": "Medium"
+        }
+      ],
+      "eventEvidence": [
+        {
+          "eventId": "EVT-007",
+          "note": "The outage retrospective requested by Backbase was completed with both the VP of Technology and the Application Manager in attendance, showing senior bank stakeholders stayed engaged through the formal close-out of the incident.",
+          "weight": "Medium"
+        }
+      ],
+      "consideredMessages": 5,
+      "filteredAsAutomated": 0,
+      "routedToReview": false,
+      "salesforceWrite": "written",
+      "ruleAdjustments": [],
+      "llmMode": "fallback",
+      "tokens": {
+        "input": 1667,
+        "output": 1865
+      }
+    },
+    {
+      "accountId": "ACC-AZTECA",
+      "runId": "run-2026-09-30T12-18-12-140Z",
+      "priorLabel": null,
+      "generatedAt": "2026-09-30T12:20:56.639Z",
+      "modelUsed": "glm-5.3",
+      "outcome": "labeled",
+      "label": "Positive",
+      "confidence": 0.9,
+      "reasoning": "The relationship is newly formalized and clearly strengthening: the bank's Head of Digital returned the countersigned agreement with praise for how quickly her legal team closed the deal, then personally drove kickoff scheduling with warm, friendly rapport. The only substantive issue in the window, a compliance query on the data processing annex, was raised constructively and resolved within days inside the window, so it is operational context rather than friction. The window closes with a bank-requested kickoff completed with senior bank stakeholders present, confirming inbound initiative and forward progress with no negative or decaying signals.",
+      "evidence": [
+        {
+          "taskId": "TSK-058",
+          "sentiment": "Positive",
+          "note": "The bank's Head of Digital returns the fully countersigned agreement and remarks that her legal team closed this vendor contract faster than any in recent memory; she also pushes to get kickoff scheduled promptly, showing praise and inbound initiative.",
+          "citedPersona": "Valentina Ríos",
+          "weight": "High"
+        },
+        {
+          "taskId": "TSK-062",
+          "sentiment": "Positive",
+          "note": "The Head of Digital proactively proposes two kickoff dates before the holiday period and uses affectionate personal banter about an owed coffee, signaling trust and a warm rapport with the vendor team.",
+          "citedPersona": "Valentina Ríos",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-060",
+          "sentiment": "Neutral",
+          "note": "The Legal and Compliance lead raises a non-blocking request to update the data processing annex to current standard clauses, framed constructively so kickoff can focus on the future; routine operational exchange.",
+          "citedPersona": "Diego Fuentes",
+          "weight": "Low"
+        },
+        {
+          "taskId": "TSK-061",
+          "sentiment": "Neutral",
+          "note": "The vendor delivers the updated annex within about a day and offers a legal-to-legal call, resolving the query inside the window without lingering friction; operational resolution, not directional evidence.",
+          "citedPersona": "Diego Fuentes",
+          "weight": "Low"
+        }
+      ],
+      "eventEvidence": [
+        {
+          "eventId": "EVT-008",
+          "note": "The bank itself requested the 90-minute kickoff, which completed with both the Head of Digital and the Legal and Compliance lead attending alongside the vendor team, confirming inbound initiative and engagement from decision-maker-level stakeholders.",
+          "weight": "High"
+        }
+      ],
+      "consideredMessages": 6,
+      "filteredAsAutomated": 0,
+      "routedToReview": false,
+      "salesforceWrite": "written",
+      "ruleAdjustments": [],
+      "llmMode": "fallback",
+      "tokens": {
+        "input": 1583,
+        "output": 2058
+      }
+    },
+    {
+      "accountId": "ACC-GRANITE",
+      "runId": "run-2026-09-30T12-18-12-140Z",
+      "priorLabel": null,
+      "generatedAt": "2026-09-30T12:21:07.564Z",
+      "modelUsed": "glm-5.3",
+      "outcome": "labeled",
+      "label": "Neutral",
+      "confidence": 0.62,
+      "reasoning": "The window is dominated by routine operations: scheduling and confirming a release upgrade, and a technical question about a deprecated reports API that the vendor answered with a low-effort migration path and an offer of free help. The only directional signal is the IT manager's resigned remark that the upgrade date slipped yet again, which hints at a pattern of missed maintenance windows and mildly lowered expectations, but it is a single terse grumble with no escalation, blocked work, or disengagement, and the bank keeps engaging normally. That is not enough to establish a deteriorating trend, so the window is Neutral.",
+      "evidence": [
+        {
+          "taskId": "TSK-066",
+          "sentiment": "Negative",
+          "note": "The bank's IT manager acknowledges the upgrade was pushed back again with a resigned, sarcastic tone, implying repeated schedule slippage by the vendor; a mild reliability gripe but not an escalation or substantive complaint.",
+          "citedPersona": "Frank Kowalski",
+          "weight": "Medium"
+        },
+        {
+          "taskId": "TSK-067",
+          "sentiment": "Neutral",
+          "note": "Forward-looking question about the deprecation timeline for an API the bank still uses; routine roadmap Q&A showing normal engagement.",
+          "citedPersona": "Frank Kowalski",
+          "weight": "Low"
+        },
+        {
+          "taskId": "TSK-068",
+          "sentiment": "Neutral",
+          "note": "Vendor explains the migration is minor and offers a no-charge walkthrough; standard support diligence, not a relationship signal beyond doing the job.",
+          "citedPersona": "Frank Kowalski",
+          "weight": "Low"
+        },
+        {
+          "taskId": "TSK-065",
+          "sentiment": "Neutral",
+          "note": "One-word confirmation of the maintenance window; pure logistics.",
+          "citedPersona": "Frank Kowalski",
+          "weight": "Low"
+        },
+        {
+          "taskId": "TSK-064",
+          "sentiment": "Neutral",
+          "note": "Outbound scheduling request for the release upgrade; administrative context establishing the thread that later slipped.",
+          "citedPersona": "Frank Kowalski",
+          "weight": "Low"
+        }
+      ],
+      "eventEvidence": [],
+      "consideredMessages": 5,
+      "filteredAsAutomated": 0,
+      "routedToReview": true,
+      "salesforceWrite": "written",
+      "ruleAdjustments": [],
+      "llmMode": "fallback",
+      "tokens": {
+        "input": 1172,
+        "output": 3065
+      }
+    },
+    {
+      "accountId": "ACC-BELLWETHER",
+      "runId": "run-2026-09-30T12-18-12-140Z",
+      "priorLabel": "Neutral",
+      "generatedAt": "2026-09-30T12:21:31.837Z",
+      "modelUsed": "glm-5.3",
+      "outcome": "skipped",
+      "label": "Neutral",
+      "confidence": null,
+      "reasoning": "No qualifying activity in the window. No LLM call, no Salesforce write; the previous label is retained and shown as stale.",
+      "evidence": [],
+      "eventEvidence": [],
+      "consideredMessages": 0,
+      "filteredAsAutomated": 0,
+      "routedToReview": false,
+      "salesforceWrite": "none",
+      "ruleAdjustments": [],
+      "llmMode": null,
+      "tokens": {
+        "input": 0,
+        "output": 0
+      }
+    }
+  ],
+  "summary": {
+    "accounts": 10,
+    "labeled": 9,
+    "skipped": 1,
+    "failed": 0,
+    "routedToReview": 1,
+    "salesforceWrites": 9,
+    "llmCalls": 9,
+    "filteredAutomatedMessages": 4,
+    "tokens": {
+      "input": 16175,
+      "output": 26310
+    }
+  }
+}

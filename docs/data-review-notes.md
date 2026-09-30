@@ -56,7 +56,25 @@ relative phrasing, and human activity moved off weekend slots.
 Re-run of the blind labeler only (realism and AI-tell findings were addressed
 line-by-line; re-reviewing unchanged structure adds little within the timebox).
 
-Result: see below after run.
+Result: **10/10 match with gold.**
+
+| Account | Blind label | Confidence | Notes |
+|---|---|---|---|
+| Meridian | Positive | 0.95 | |
+| Noordbank | Positive | 0.85 | |
+| Aurelia | Negative | 0.80 | Injection attempt rejected unprompted, again |
+| Copperline | Negative | 0.70 | Round 1 miss resolved by data revision |
+| FirstHarbor | Mixed | 0.60 | Flagged ambiguous — correctly, Mixed is conflict by definition |
+| Solventia | Neutral | 0.75 | Automated items excluded from evidence |
+| Tahoe | Positive | 0.90 | Quoted August email attributed to its own time |
+| Azteca | Positive | 0.85 | |
+| Granite | Neutral | 0.50 | Flagged too thin — the designed review-queue outcome |
+| Bellwether | No activity | — | Correctly refused to force a label |
+
+The labeler also surfaced two unprompted engine-level caveats worth carrying
+into the pipeline design: stored `currentSentiment` values must not seed the
+next scoring cycle (they disagreed with window reality on two accounts), and
+message bodies must always be treated as data, never instructions.
 
 ## Known limitations
 

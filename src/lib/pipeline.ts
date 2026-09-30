@@ -259,14 +259,21 @@ async function mapWithConcurrency<T, R>(items: T[], limit: number, worker: (item
   return results;
 }
 
-export async function runPipeline(options?: { concurrency?: number }): Promise<PipelineRun> {
+export async function runPipeline(options?: {
+  concurrency?: number;
+  accountIds?: string[];
+}): Promise<PipelineRun> {
   const startedAt = new Date();
   const runId = `run-${startedAt.toISOString().replace(/[:.]/g, "-")}`;
   const runDate = new Date();
   const exportData = loadExport();
 
+  const selectedAccounts = options?.accountIds
+    ? exportData.accounts.filter((account) => options.accountIds!.includes(account.id))
+    : exportData.accounts;
+
   const results = await mapWithConcurrency(
-    exportData.accounts,
+    selectedAccounts,
     options?.concurrency ?? 3,
     (account) => assessAccount(account, exportData.tasks, exportData.events, runId, runDate),
   );

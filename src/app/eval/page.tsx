@@ -1,9 +1,12 @@
 "use client";
 
 import { useMemo } from "react";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { RunProgressPanel, RunReopenChip } from "@/components/run-progress-panel";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
   TableBody,
@@ -13,23 +16,34 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useAppData } from "@/lib/use-app-data";
-import { labelBadgeClass, formatTimestamp } from "@/lib/ui-labels";
+import { RUN_BATCH_SIZE, useLiveRun } from "@/lib/use-live-run";
+import { StatCard } from "@/components/stat-card";
+import { outcomeFor } from "@/lib/eval";
+import { labelBadgeClass, reviewBadgeClass } from "@/lib/utils";
+import { formatTimestamp } from "@/lib/format";
 
 const AXIS = ["Positive", "Neutral", "Negative", "Mixed", "Skipped"];
 
 export default function EvalPage() {
-  const { state, error } = useAppData();
+  const {
+    state,
+    error,
+    running,
+    runItems,
+    runCancelled,
+    elapsed,
+    runPipelineNow,
+    cancelRun,
+    dismissed,
+    dismissRunItems,
+    reopenRunPanel,
+  } = useLiveRun("eval");
 
   const comparison = useMemo(() => {
     if (!state) return null;
     const rows = state.gold.gold.map((entry) => {
       const result = state.run.results.find((r) => r.accountId === entry.accountId);
-      const got =
-        !result ? "Missing" :
-        result.outcome === "skipped" ? "Skipped" :
-        result.outcome === "failed" ? "Failed" :
-        result.label ?? "Unknown";
+      const got = outcomeFor(result);
       return {
         accountId: entry.accountId,
         expected: entry.expected,
@@ -63,35 +77,84 @@ export default function EvalPage() {
 
   if (!state || !comparison) {
     return (
-      <div className="space-y-4">
-        <Skeleton className="h-9 w-64" />
-        <div className="grid gap-4 md:grid-cols-3">
-          {[...Array(3)].map((_, i) => (
-            <Skeleton key={i} className="h-28" />
+      <div className="space-y-6">
+        <div className="space-y-2">
+          <Skeleton className="h-7 w-40" />
+          <Skeleton className="h-4 w-72" />
+        </div>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {[...Array(4)].map((_, i) => (
+            <Skeleton key={i} className="h-24" />
           ))}
         </div>
-        <Skeleton className="h-80" />
+        <Skeleton className="h-72 rounded-lg" />
+        <Skeleton className="h-72 rounded-lg" />
       </div>
     );
   }
 
+  const accuracy = comparison.total > 0 ? Math.round((comparison.matches / comparison.total) * 100) : 0;
+  const routedToReview = comparison.rows.filter((row) => row.reviewRouting).length;
+
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-start justify-between gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Evaluation</h1>
+          <h1 className="text-xl font-semibold">Evaluation</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            {state.source === "live" ? "live run (this browser)" : "cached demo run"} ·{" "}
-            {formatTimestamp(state.run.finishedAt)} · {state.run.modelUsed}
+            {state.runOrigin === "file"
+              ? "demo data"
+              : state.source === "live"
+                ? "live run"
+                : "cached demo run"}{" "}
+            · {formatTimestamp(state.run.finishedAt)} · {state.run.modelUsed}
           </p>
         </div>
-        <div className="flex items-baseline gap-2">
-          <span className="text-4xl font-semibold tabular-nums">
-            {comparison.matches}/{comparison.total}
-          </span>
-          <span className="text-sm text-muted-foreground">gold matches</span>
-        </div>
+        <Button onClick={runPipelineNow} disabled={running}>
+          {running ? (
+            <>
+              <Spinner /> Evaluating… {elapsed}s
+            </>
+          ) : (
+            "Run fresh evaluation"
+          )}
+        </Button>
       </div>
+
+      {runItems && !dismissed && (
+        <RunProgressPanel
+          items={runItems}
+          batchSize={RUN_BATCH_SIZE}
+          running={running}
+          elapsed={elapsed}
+          onClose={dismissRunItems}
+          cancelled={runCancelled}
+          onCancel={cancelRun}
+          variant="eval"
+          evalScore={comparison ? { matches: comparison.matches, total: comparison.total } : null}
+        />
+      )}
+
+      {running && dismissed && (
+        <RunReopenChip elapsed={elapsed} onReopen={reopenRunPanel} variant="eval" />
+      )}
+
+      {state.runOrigin === "file" && (
+        <Alert>
+          <AlertTitle>Viewing demo data</AlertTitle>
+          <AlertDescription>
+            This comparison uses the recorded run included with the app. Configure an LLM key and
+            a database connection to run a fresh evaluation.
+          </AlertDescription>
+        </Alert>
+      )}
+
+      <dl className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <StatCard label="Gold matches" value={`${comparison.matches}/${comparison.total}`} />
+        <StatCard label="Accuracy" value={`${accuracy}%`} />
+        <StatCard label="Mismatches" value={comparison.total - comparison.matches} />
+        <StatCard label="Routed to review" value={routedToReview} />
+      </dl>
 
       <Alert>
         <AlertTitle>What this proves, and what it does not</AlertTitle>
@@ -103,11 +166,9 @@ export default function EvalPage() {
         </AlertDescription>
       </Alert>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Confusion matrix</CardTitle>
-        </CardHeader>
-        <CardContent className="p-0">
+      <section className="space-y-2">
+        <h2 className="font-medium">Confusion matrix</h2>
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>
@@ -128,8 +189,10 @@ export default function EvalPage() {
                       <TableCell key={col} className="text-center">
                         {count > 0 ? (
                           <span
-                            className={`inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium ${
-                              isDiagonal ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-800"
+                            className={`inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium tabular-nums ${
+                              isDiagonal
+                                ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                                : "bg-destructive/10 text-destructive"
                             }`}
                           >
                             {count}
@@ -144,14 +207,12 @@ export default function EvalPage() {
               ))}
             </TableBody>
           </Table>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Per-account comparison</CardTitle>
-        </CardHeader>
-        <CardContent className="p-0">
+      <section className="space-y-2">
+        <h2 className="font-medium">Per-account comparison</h2>
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>
@@ -167,7 +228,12 @@ export default function EvalPage() {
               {comparison.rows.map((row) => (
                 <TableRow key={row.accountId}>
                   <TableCell>
-                    <div className="font-medium">{row.name}</div>
+                    <Link
+                      href={`/accounts/${row.accountId}`}
+                      className="font-medium underline-offset-4 hover:underline"
+                    >
+                      {row.name}
+                    </Link>
                     <div className="text-xs text-muted-foreground">{row.accountId}</div>
                   </TableCell>
                   <TableCell>
@@ -186,9 +252,9 @@ export default function EvalPage() {
                   <TableCell>
                     {row.expectedRouting ? (
                       row.reviewRouting ? (
-                        <Badge variant="outline" className="border-emerald-300 bg-emerald-50 text-emerald-800">routed as designed</Badge>
+                        <Badge variant="outline" className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">routed as designed</Badge>
                       ) : (
-                        <Badge variant="outline" className="border-amber-300 bg-amber-50 text-amber-900">not routed</Badge>
+                        <Badge variant="outline" className={reviewBadgeClass}>not routed</Badge>
                       )
                     ) : row.reviewRouting ? (
                       <Badge variant="outline">routed</Badge>
@@ -198,7 +264,7 @@ export default function EvalPage() {
                   </TableCell>
                   <TableCell>
                     {row.match ? (
-                      <Badge variant="outline" className="border-emerald-300 bg-emerald-50 text-emerald-800">match</Badge>
+                      <Badge variant="outline" className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">match</Badge>
                     ) : (
                       <Badge variant="destructive">mismatch</Badge>
                     )}
@@ -207,8 +273,8 @@ export default function EvalPage() {
               ))}
             </TableBody>
           </Table>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
     </div>
   );
 }

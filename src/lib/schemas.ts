@@ -162,3 +162,12 @@ export type GoldFile = z.infer<typeof GoldFileSchema>;
 export type AccountResult = z.infer<typeof AccountResultSchema>;
 export type PipelineRun = z.infer<typeof PipelineRunSchema>;
 export type Label = z.infer<typeof LabelSchema>;
+
+/** Live per-account progress of a server-side run, polled from the browser. */
+export type RunProgressItem = {
+  accountId: string;
+  name: string;
+  status: "queued" | "running" | "done" | "failed";
+  outcome?: AccountResult["outcome"] | null;
+  label?: Label | null;
+};

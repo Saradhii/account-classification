@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
+
+import { AppHeader } from "@/components/app-header";
+import { ThemeProvider } from "@/components/theme-provider";
+
 import "./globals.css";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Account Health Signal",
+  title: "Salesforce Account Classification",
   description: "Engagement sentiment for banking accounts, refreshed every two weeks",
 };
 
@@ -25,31 +26,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans")}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-muted/30">
-        <header className="sticky top-0 z-10 border-b bg-background">
-          <div className="mx-auto flex h-14 w-full max-w-6xl items-center gap-6 px-6">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="font-semibold tracking-tight">Account Health Signal</span>
-              <Badge variant="outline" className="text-muted-foreground">POC</Badge>
-            </Link>
-            <nav className="flex items-center gap-1">
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/">Dashboard</Link>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/eval">Evaluation</Link>
-              </Button>
-            </nav>
-          </div>
-        </header>
-        <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8">{children}</main>
-        <footer className="border-t bg-background">
-          <div className="mx-auto w-full max-w-6xl px-6 py-3 text-xs text-muted-foreground">
-            Backbase GTM case study · synthetic data · labels refresh every 2 weeks
-          </div>
-        </footer>
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <AppHeader />
+          <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-8">{children}</main>
+          <footer className="border-t">
+            <div className="mx-auto w-full max-w-5xl px-6 py-3 text-xs text-muted-foreground">
+              Backbase GTM case study · labels refresh every 2 weeks
+            </div>
+          </footer>
+          <Toaster position="bottom-right" richColors closeButton />
+        </ThemeProvider>
       </body>
     </html>
   );

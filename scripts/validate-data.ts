@@ -8,7 +8,7 @@ import {
 const WINDOW_DAYS = 13;
 
 const exportData = SalesforceExportSchema.parse(
-  JSON.parse(readFileSync(new URL("../data/salesforce-export.json", import.meta.url), "utf8")),
+  JSON.parse(readFileSync(new URL("../data/salesforce.json", import.meta.url), "utf8")),
 );
 
 const goldData = GoldFileSchema.parse(
@@ -19,7 +19,6 @@ const failures: string[] = [];
 const fail = (msg: string) => failures.push(msg);
 
 const accountIds = new Set(exportData.accounts.map((a) => a.id));
-const taskIds = new Set(exportData.tasks.map((t) => t.id));
 
 for (const task of exportData.tasks) {
   if (!accountIds.has(task.accountId)) fail(`${task.id}: unknown accountId ${task.accountId}`);

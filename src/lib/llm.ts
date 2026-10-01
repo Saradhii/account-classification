@@ -18,6 +18,11 @@ export function activeModel(): string {
   return process.env.ZAI_MODEL ?? "glm-5.3";
 }
 
+/** Whether an LLM key is configured, so run endpoints can fail fast. */
+export function hasLlmKey(): boolean {
+  return Boolean(process.env.ZAI_API_KEY);
+}
+
 const model = provider.chatModel(activeModel());
 
 function stripFences(text: string): string {
@@ -44,7 +49,7 @@ export async function askStructured<T>(options: {
         outputTokens: result.usage.outputTokens ?? 0,
       },
     };
-  } catch (nativeError) {
+  } catch {
     return askViaStrictJson(options);
   }
 }

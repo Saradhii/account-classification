@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { ChevronRightIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,8 +12,14 @@ import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useAppData } from "@/lib/use-app-data";
-import { labelBadgeClass, sentimentBadgeClass, weightBadgeClass, formatTimestamp } from "@/lib/ui-labels";
+import { useAppData } from "@/lib/use-live-run";
+import { StatCard } from "@/components/stat-card";
+import {
+  labelBadgeClass,
+  sentimentBadgeClass,
+  weightBadgeClass,
+} from "@/lib/utils";
+import { formatTimestamp } from "@/lib/format";
 
 export default function AccountDetailPage() {
   const params = useParams<{ id: string }>();
@@ -30,10 +37,16 @@ export default function AccountDetailPage() {
 
   if (!state) {
     return (
-      <div className="space-y-4">
-        <Skeleton className="h-8 w-48" />
-        <Skeleton className="h-40" />
-        <Skeleton className="h-96" />
+      <div className="space-y-6">
+        <Skeleton className="h-5 w-48" />
+        <Skeleton className="h-8 w-64" />
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {[...Array(4)].map((_, i) => (
+            <Skeleton key={i} className="h-24" />
+          ))}
+        </div>
+        <Skeleton className="h-64 rounded-xl" />
+        <Skeleton className="h-64 rounded-xl" />
       </div>
     );
   }
@@ -44,10 +57,14 @@ export default function AccountDetailPage() {
 
   if (!account || !result) {
     return (
-      <div className="space-y-4">
-        <Button variant="ghost" size="sm" asChild>
-          <Link href="/">← All accounts</Link>
-        </Button>
+      <div className="space-y-6">
+        <nav className="flex items-center gap-1 text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-foreground">
+            Dashboard
+          </Link>
+          <ChevronRightIcon className="size-4" />
+          <span className="text-foreground">Not found</span>
+        </nav>
         <Alert>
           <AlertTitle>Account not found</AlertTitle>
           <AlertDescription>No account with id {accountId} in the current data.</AlertDescription>
@@ -69,57 +86,55 @@ export default function AccountDetailPage() {
 
   return (
     <div className="space-y-6">
-      <Button variant="ghost" size="sm" asChild>
-        <Link href="/">← All accounts</Link>
-      </Button>
+      <nav className="flex items-center gap-1 text-sm text-muted-foreground">
+        <Link href="/" className="hover:text-foreground">
+          Dashboard
+        </Link>
+        <ChevronRightIcon className="size-4" />
+        <span className="truncate text-foreground">{account.name}</span>
+      </nav>
 
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-semibold tracking-tight">{account.name}</h1>
-            {result.outcome === "labeled" && result.label ? (
-              <Badge variant="outline" className={`text-sm ${labelBadgeClass[result.label] ?? ""}`}>
-                {result.label}
-              </Badge>
-            ) : result.outcome === "skipped" ? (
-              <Badge variant="outline" className="text-sm">Skipped</Badge>
-            ) : (
-              <Badge variant="destructive" className="text-sm">Failed</Badge>
-            )}
-          </div>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {account.type} · {account.region} · {account.tier} · renewal in {account.renewalInDays ?? "—"} days (context only, not a sentiment input)
-          </p>
+      <div>
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="text-xl font-semibold">{account.name}</h1>
+          {result.outcome === "labeled" && result.label ? (
+            <Badge variant="outline" className={labelBadgeClass[result.label] ?? ""}>
+              {result.label}
+            </Badge>
+          ) : result.outcome === "skipped" ? (
+            <Badge variant="outline">Skipped</Badge>
+          ) : (
+            <Badge variant="destructive">Failed</Badge>
+          )}
         </div>
-        <Card className="w-full max-w-xs">
-          <CardContent className="space-y-2 py-4">
-            {result.confidence !== null ? (
-              <>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Confidence</span>
-                  <span className="font-medium tabular-nums">{result.confidence.toFixed(2)}</span>
-                </div>
-                <Progress value={result.confidence * 100} />
-              </>
-            ) : (
-              <p className="text-sm text-muted-foreground">No confidence — not assessed</p>
-            )}
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Salesforce write</span>
-              <span className="font-medium">{result.salesforceWrite}</span>
-            </div>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Prior label</span>
-              <span className="font-medium">{result.priorLabel ?? "none"}</span>
-            </div>
-          </CardContent>
-        </Card>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {account.type} · {account.region} · {account.tier} · renewal in {account.renewalInDays ?? "—"} days (context only, not a sentiment input)
+        </p>
       </div>
 
+      <dl className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <StatCard
+          label="Confidence"
+          size="sm"
+          value={result.confidence !== null ? result.confidence.toFixed(2) : "—"}
+        >
+          {result.confidence !== null && (
+            <Progress value={result.confidence * 100} className="mt-2 h-1.5" />
+          )}
+        </StatCard>
+        <StatCard label="Salesforce write" size="sm" value={result.salesforceWrite} />
+        <StatCard label="Prior label" size="sm" value={result.priorLabel ?? "none"} />
+        <StatCard
+          label="Review"
+          size="sm"
+          value={result.routedToReview ? "needs review" : "automatic"}
+        />
+      </dl>
+
       {result.routedToReview && (
-        <Alert className="border-amber-300 bg-amber-50">
-          <AlertTitle className="text-amber-900">Routed to human review</AlertTitle>
-          <AlertDescription className="text-amber-900">
+        <Alert variant="warning">
+          <AlertTitle>Routed to human review</AlertTitle>
+          <AlertDescription>
             {result.error
               ? "Assessment failed and the account needs a human look before the label is trusted."
               : "Confidence below the 0.75 threshold or an aggregation rule flagged inconsistent evidence. A CSM confirms before the field is trusted."}
@@ -136,7 +151,7 @@ export default function AccountDetailPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Why this label</CardTitle>
+          <CardTitle>Why this label</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <p className="text-sm leading-relaxed">{result.reasoning}</p>
@@ -163,7 +178,7 @@ export default function AccountDetailPage() {
       {evidenceTasks.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Message evidence</CardTitle>
+            <CardTitle>Message evidence</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {evidenceTasks.map(({ item, task }) => (
@@ -199,7 +214,7 @@ export default function AccountDetailPage() {
       {result.eventEvidence.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Meeting evidence</CardTitle>
+            <CardTitle>Meeting evidence</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {result.eventEvidence.map((item) => {
@@ -225,7 +240,7 @@ export default function AccountDetailPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Pipeline detail</CardTitle>
+          <CardTitle>Pipeline detail</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
           <p>{result.consideredMessages} messages considered · {result.filteredAsAutomated} automated messages filtered by rules before any LLM call</p>

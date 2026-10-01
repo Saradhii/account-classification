@@ -12,17 +12,9 @@ function readDataFile(fileName: string): string {
 }
 
 export function loadExport(): SalesforceExport {
-  return SalesforceExportSchema.parse(JSON.parse(readDataFile("salesforce-export.json")));
+  return SalesforceExportSchema.parse(JSON.parse(readDataFile("salesforce.json")));
 }
 
 export function loadGold(): GoldFile {
   return GoldFileSchema.parse(JSON.parse(readDataFile("gold-labels.json")));
-}
-
-export function materializeTimestamp(daysAgo: number, timeOfDay: string, runDate: Date): string {
-  const [hours, minutes] = timeOfDay.split(":").map(Number);
-  const date = new Date(runDate);
-  date.setDate(date.getDate() - daysAgo);
-  date.setHours(hours, minutes, 0, 0);
-  return date.toISOString();
 }
